@@ -14,7 +14,10 @@ function App() {
         <div className="App">
           <Header />
           <Route exact path="/dashboard" component={Dashboard}/>
-          <Route exact path="/addProject" component={AddProject}/>
+          <Route exact path="/addProject" render={(props) => <AddProject {...props} />}  />
+          {
+            //<Route exact path="/addProject" component={AddProject}  />
+          }
         </div>
       </Router>
     </Provider>
