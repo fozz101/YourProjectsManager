@@ -1,6 +1,6 @@
 package io.fozz101.ypm.exceptions;
-
 public class ProjectIdExceptionResponse {
+
     private String projectIdentifier;
 
     public ProjectIdExceptionResponse(String projectIdentifier) {
