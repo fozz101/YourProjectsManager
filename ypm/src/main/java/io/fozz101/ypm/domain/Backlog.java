@@ -3,13 +3,15 @@ package io.fozz101.ypm.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Backlog {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Integer PTSequence=0;
+    private Integer  PTSequence=0;
     private String projectIdentifier;
 
     //OneToOne with project
@@ -18,9 +20,19 @@ public class Backlog {
     @JsonIgnore
     private Project project;
     //OneToMany projectTasks
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "backlog")
+    private List<ProjectTask> projectTasks = new ArrayList<>();
 
 
     public Backlog() {
+    }
+
+    public List<ProjectTask> getProjectTasks() {
+        return projectTasks;
+    }
+
+    public void setProjectTasks(List<ProjectTask> projectTasks) {
+        this.projectTasks = projectTasks;
     }
 
     public Project getProject() {
