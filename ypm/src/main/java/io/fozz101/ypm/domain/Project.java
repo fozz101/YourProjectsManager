@@ -2,6 +2,7 @@ package io.fozz101.ypm.domain;
 
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import io.fozz101.ypm.converter.TrimConverter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -19,6 +20,7 @@ public class Project {
     @NotBlank(message="Project Identifier is required !")
     @Size(min=4,max=5,message = "Please use 4 to 5 characters !")
     @Column(updatable = false, unique = true)
+    @Convert(converter = TrimConverter.class)
     private String projectIdentifier;
     @NotBlank(message = "Project description is required !")
     private String description;
