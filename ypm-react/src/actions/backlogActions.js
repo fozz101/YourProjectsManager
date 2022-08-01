@@ -49,3 +49,14 @@ export const getProjectTask = (backlog_id,pt_id,history) =>async dispatch => {
         history.push("/dashboard")
     }
 }
+
+
+export const deleteProjectTask = (backlog_id,pt_id) => async dispatch => {
+    if(window.confirm("This will be permenantely deleted! Continue ?")){
+        const res = await axios.delete(`/api/backlog/${backlog_id}/${pt_id}`)
+        dispatch({
+            type:DELETE_PROJECT_TASK,
+            payload : pt_id
+        })
+    }
+}
