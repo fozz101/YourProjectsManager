@@ -33,3 +33,19 @@ export const getBacklog =(backlog_id) => async dispatch => {
         //history.push("/dashboard")
     }
 }
+
+export const getProjectTask = (backlog_id,pt_id,history) =>async dispatch => {
+    try {
+        const res = await axios.get(`/api/backlog/${backlog_id}/${pt_id}`)
+        dispatch({
+            type:GET_PROJECT_TASK,
+            payload: res.data
+        })
+    } catch (error) {
+        dispatch(
+        {type:GET_ERRORS,
+        payload:error.response.data
+        })
+        history.push("/dashboard")
+    }
+}
