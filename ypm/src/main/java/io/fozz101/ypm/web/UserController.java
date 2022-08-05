@@ -3,6 +3,7 @@ package io.fozz101.ypm.web;
 import io.fozz101.ypm.domain.User;
 import io.fozz101.ypm.services.MapValidationErrorService;
 import io.fozz101.ypm.services.UserService;
+import io.fozz101.ypm.validator.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,9 +22,12 @@ public class UserController {
     private MapValidationErrorService mapValidationErrorService;
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private UserValidator userValidator;
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(@Valid@RequestBody User user, BindingResult result){
-
+        userValidator.validate(user,result);
         ResponseEntity<?> errorMap = mapValidationErrorService.MapValidationService(result);
         if (errorMap!=null) return  errorMap;
         User newUser = userService.saveUser(user);
