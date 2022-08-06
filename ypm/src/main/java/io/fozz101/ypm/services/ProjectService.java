@@ -2,9 +2,11 @@ package io.fozz101.ypm.services;
 
 import io.fozz101.ypm.domain.Backlog;
 import io.fozz101.ypm.domain.Project;
+import io.fozz101.ypm.domain.User;
 import io.fozz101.ypm.exceptions.ProjectIdException;
 import io.fozz101.ypm.repositories.BacklogRepository;
 import io.fozz101.ypm.repositories.ProjectRepository;
+import io.fozz101.ypm.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,8 +16,16 @@ public class ProjectService {
     private ProjectRepository projectRepository;
     @Autowired
     private BacklogRepository backlogRepository;
-    public Project saveOrUpdateProject(Project project){
+
+    @Autowired
+    private UserRepository userRepository;
+    public Project saveOrUpdateProject(Project project, String username){
         try{
+            User user = userRepository.findUserByUsername(username);
+            project.setUser(user);
+            project.setProjectLeader(user.getUsername());
+
+
             project.setProjectIdentifier(project.getProjectIdentifier().toUpperCase());
             if (project.getId()==null){
                 Backlog backlog = new Backlog();
