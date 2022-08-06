@@ -10,7 +10,7 @@ class Login extends Component {
                     <h1 className="display-4 text-center">Log In</h1>
                     <form action="dashboard.html">
                         <div className="form-group">
-                            <input type="email" className="form-control form-control-lg" placeholder="Email Address" name="email" />
+                            <input type="email" className="form-control form-control-lg" placeholder="Email Address" name="username" />
                         </div>
                         <div className="form-group">
                             <input type="password" className="form-control form-control-lg" placeholder="Password" name="password" />
